@@ -37,14 +37,8 @@ class UserService
 
     public function updateAvatar(UploadedFile $avatar): User
     {
-        $path = $avatar->store('avatars', 'public');
-
-        $url = Storage::disk('public')->url($path);
-
         /** @var \App\Models\User */
-        $user = tap(Auth::user())->update(['avatar' => $url]);
-
-        return $user;
+        return tap(Auth::user())->update(['avatar' => uploadImage($avatar)]);
     }
 
     public function update(UpdateUserData $data): User
