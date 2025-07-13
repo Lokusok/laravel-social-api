@@ -5,4 +5,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['controller' => UserController::class, 'prefix' => 'users', 'as' => 'users.'], function () {
     Route::get('/{user}', 'getUser')->name('get-user');
+    Route::get('/{user}/subscribers', 'subscribers')->name('subscribers');
 });

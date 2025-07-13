@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateAvatarRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\CurrentUserResource;
+use App\Http\Resources\User\SubscriberResource;
 use App\Http\Resources\User\UserResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,5 +32,10 @@ class UserController extends Controller
     public function getUser(UserModel $user)
     {
         return UserResource::make($user);
+    }
+
+    public function subscribers(UserModel $user)
+    {
+        return SubscriberResource::collection($user->subscriptions)->resolve();
     }
 }
