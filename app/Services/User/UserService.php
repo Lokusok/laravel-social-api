@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\User\Data\LoginData;
 use App\Services\User\Data\RegisterUserData;
 use App\Services\User\Data\UpdateUserData;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -47,5 +48,24 @@ class UserService
         $user = tap(Auth::user())->update($data->toArray());
 
         return $user;
+    }
+
+    public function posts(User $user, int $limit = 10, int $offset = 0): Collection
+    {
+        return $user
+            ->posts()
+            ->limit($limit)
+            ->offset($offset)
+            ->orderBy('id', 'DESC')
+            ->get()
+        ;
+    }
+
+    public function totalPosts(User $user): int
+    {
+        return $user
+            ->posts()
+            ->count()
+        ;
     }
 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Facades\User;
 use App\Models\User as UserModel;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\GetPostsRequest;
 use App\Http\Requests\User\UpdateAvatarRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Http\Resources\Post\FeedPostResource;
 use App\Http\Resources\User\CurrentUserResource;
 use App\Http\Resources\User\SubscriberResource;
 use App\Http\Resources\User\UserResource;
@@ -46,5 +48,15 @@ class UserController extends Controller
         return response()->json([
             'state' => $user->subscribe(),
         ], Response::HTTP_OK);
+    }
+
+    public function posts(UserModel $user, GetPostsRequest $request)
+    {
+        return response()->json([
+            'posts' => FeedPostResource::collection(
+                User::posts($user, $request->limit(), $request->offset())
+            ),
+            'total' => User::totalPosts($user),
+        ]);
     }
 }
