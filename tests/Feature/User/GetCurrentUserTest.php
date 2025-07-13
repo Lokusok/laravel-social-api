@@ -13,19 +13,8 @@ class GetCurrentUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    private User $user;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->user = User::factory()->create();
-    }
-
     public function test_success_get_current_user(): void
     {
-        Sanctum::actingAs($this->user);
-
         $response = $this->get(route('user.current'));
 
         $response->assertStatus(Response::HTTP_OK);

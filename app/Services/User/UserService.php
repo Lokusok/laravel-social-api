@@ -6,7 +6,9 @@ use App\Exceptions\User\InvalidUserCredentialsException;
 use App\Models\User;
 use App\Services\User\Data\LoginData;
 use App\Services\User\Data\RegisterUserData;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class UserService
 {
@@ -30,5 +32,17 @@ class UserService
         return [
             'token' => $token->plainTextToken,
         ];
+    }
+
+    public function updateAvatar(UploadedFile $avatar): User
+    {
+        $path = $avatar->store('avatars', 'public');
+
+        $url = Storage::disk('public')->url($path);
+
+        /** @var \App\Models\User */
+        $user = tap(Auth::user())->update(['avatar' => $url]);
+
+        return $user;
     }
 }
