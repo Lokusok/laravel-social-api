@@ -15,13 +15,13 @@ class PostController extends Controller
         //
     }
 
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request): PostResource
     {
         return PostResource::make(Post::store($request->toData()));
     }
 
-    public function show()
+    public function show(PostModel $post): PostResource
     {
-        //
+        return PostResource::make($post);
     }
 }
