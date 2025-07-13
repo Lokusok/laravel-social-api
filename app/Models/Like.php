@@ -10,6 +10,10 @@ class Like extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+    ];
+
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);

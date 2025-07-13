@@ -8,6 +8,7 @@ use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post as PostModel;
 use Illuminate\Routing\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -43,5 +44,12 @@ class PostController extends Controller
         $post->delete();
 
         return response()->noContent();
+    }
+
+    public function like(PostModel $post)
+    {
+        return response()->json([
+            'state' => $post->like(),
+        ], Response::HTTP_OK);
     }
 }
