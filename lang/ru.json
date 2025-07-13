@@ -3,5 +3,6 @@
     "Bad request": "Плохой запрос",
     "Invalid user credentials": "Неверные пользовательские данные",
     "User not found": "Пользователь не найден",
-    "Entity not found": "Сущность не найдена"
+    "Entity not found": "Сущность не найдена",
+    "You have no access to this post": "У вас нет доступа к этому посту"
 }

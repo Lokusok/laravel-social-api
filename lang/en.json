@@ -3,5 +3,6 @@
     "Bad request": "Bad request",
     "Invalid user credentials": "Invalid user credentials",
     "User not found": "User not found",
-    "Entity not found": "Entity not found"
+    "Entity not found": "Entity not found",
+    "You have no access to this post": "You have no access to this post"
 }
