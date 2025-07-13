@@ -1,4 +1,5 @@
 {
     "This endpoint does not exist": "This endpoint does not exist",
-    "Bad request": "Bad request"
+    "Bad request": "Bad request",
+    "Invalid user credentials": "Invalid user credentials"
 }
