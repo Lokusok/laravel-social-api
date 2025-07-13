@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\SubscribeState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -95,5 +97,29 @@ class User extends Authenticatable
             ->where('subscriber_id', '=', Auth::id())
             ->exists()
         ;
+    }
+
+    public function subscribe(): SubscribeState
+    {
+        $subscription = Subscription::query()
+            ->where('user_id', '=', $this->id)
+            ->where('subscriber_id', '=', Auth::id())
+            ->first()
+        ;
+
+        if (is_null($subscription)) {
+            Subscription::query()
+                ->create([
+                    'user_id' => $this->id,
+                    'subscriber_id' => Auth::id(),
+                ])
+            ;
+
+            return SubscribeState::SUBSCRIBED;
+        }
+
+        $subscription->delete();
+
+        return SubscribeState::UNSUBSCRIBED;
     }
 }

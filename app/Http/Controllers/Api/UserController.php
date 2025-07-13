@@ -10,7 +10,9 @@ use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\CurrentUserResource;
 use App\Http\Resources\User\SubscriberResource;
 use App\Http\Resources\User\UserResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -37,5 +39,12 @@ class UserController extends Controller
     public function subscribers(UserModel $user)
     {
         return SubscriberResource::collection($user->subscriptions)->resolve();
+    }
+
+    public function subscribe(UserModel $user): JsonResponse
+    {
+        return response()->json([
+            'state' => $user->subscribe(),
+        ], Response::HTTP_OK);
     }
 }
