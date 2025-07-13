@@ -18,7 +18,7 @@ class LoginTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::factory(1)->create()->first();
+        $this->user = User::factory()->create();
     }
 
     public function test_success_auth_with_email(): void
