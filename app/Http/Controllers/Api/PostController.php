@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Facades\Post;
 use App\Http\Requests\Post\AddCommentRequest;
+use App\Http\Requests\Post\GetPostsRequest;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Comment\CommentResource;
+use App\Http\Resources\Post\FeedPostResource;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post as PostModel;
 use Illuminate\Routing\Controller;
@@ -21,9 +23,16 @@ class PostController extends Controller
         ;
     }
 
-    public function index()
+    public function index(GetPostsRequest $request)
     {
-        //
+        $posts = FeedPostResource::collection(
+            Post::feed($request->limit(), $request->offset())
+        );
+
+        return response()->json([
+            'posts' => $posts,
+            'total' => Post::totalFeedPosts(),
+        ]);
     }
 
     public function update(PostModel $post, UpdatePostRequest $request)

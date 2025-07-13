@@ -122,4 +122,16 @@ class User extends Authenticatable
 
         return SubscribeState::UNSUBSCRIBED;
     }
+
+    public function feedPosts(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Post::class,
+            Subscription::class,
+            'subscriber_id',
+            'user_id',
+            'id',
+            'user_id',
+        );
+    }
 }
