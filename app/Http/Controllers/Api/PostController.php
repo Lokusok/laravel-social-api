@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Facades\Post;
+use App\Http\Requests\Post\AddCommentRequest;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
+use App\Http\Resources\Comment\CommentResource;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post as PostModel;
 use Illuminate\Routing\Controller;
@@ -51,5 +53,10 @@ class PostController extends Controller
         return response()->json([
             'state' => $post->like(),
         ], Response::HTTP_OK);
+    }
+
+    public function addComment(PostModel $post, AddCommentRequest $request): CommentResource
+    {
+        return CommentResource::make($post->comments()->create($request->toData()->toArray()));
     }
 }

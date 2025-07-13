@@ -8,6 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
 {
+    public static $wrap = null;
+
     /**
      * @return array<string, mixed>
      */
