@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -89,5 +90,14 @@ class User extends Authenticatable
     public function commentedPosts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class, 'comments', 'post_id', 'user_id');
+    }
+
+    public function isSubscribed(): bool
+    {
+        return Subscription::query()
+            ->where('user_id', '=', $this->id)
+            ->where('subscriber_id', '=', Auth::id())
+            ->exists()
+        ;
     }
 }

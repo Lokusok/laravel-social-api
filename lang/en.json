@@ -1,5 +1,7 @@
 {
     "This endpoint does not exist": "This endpoint does not exist",
     "Bad request": "Bad request",
-    "Invalid user credentials": "Invalid user credentials"
+    "Invalid user credentials": "Invalid user credentials",
+    "User not found": "User not found",
+    "Entity not found": "Entity not found"
 }

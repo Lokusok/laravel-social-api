@@ -1,5 +1,7 @@
 {
     "This endpoint does not exist": "Такого эндпоинта не существует",
     "Bad request": "Плохой запрос",
-    "Invalid user credentials": "Неверные пользовательские данные"
+    "Invalid user credentials": "Неверные пользовательские данные",
+    "User not found": "Пользователь не найден",
+    "Entity not found": "Сущность не найдена"
 }

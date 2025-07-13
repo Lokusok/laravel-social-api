@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,6 +18,15 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (NotFoundHttpException $exception) {
+            $previousException = $exception->getPrevious();
+
+            if ($previousException instanceof ModelNotFoundException) {
+                return responseFailed(
+                    getModelNotFoundMessage($previousException->getModel()),
+                    Response::HTTP_NOT_FOUND,
+                );
+            }
+
             return responseFailed(
                 __('This endpoint does not exist'),
                 Response::HTTP_NOT_FOUND

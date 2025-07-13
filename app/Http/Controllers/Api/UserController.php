@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Facades\User;
+use App\Models\User as UserModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateAvatarRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\CurrentUserResource;
+use App\Http\Resources\User\UserResource;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -24,5 +26,10 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request)
     {
         return CurrentUserResource::make(User::update($request->toData()));
+    }
+
+    public function getUser(UserModel $user)
+    {
+        return UserResource::make($user);
     }
 }
