@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'login',
         'avatar',
+        'about',
         'is_verified',
         'email',
         'password',
@@ -48,12 +49,18 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_verified' => 'bool',
         ];
     }
 
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class, 'user_id');
+    }
+
+    public function subscribtionsCount(): int
+    {
+        return $this->subscriptions->count();
     }
 
     public function subscribers(): HasMany
@@ -64,6 +71,11 @@ class User extends Authenticatable
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function postsCount(): int
+    {
+        return $this->posts->count();
     }
 
     public function likedPosts(): BelongsToMany
