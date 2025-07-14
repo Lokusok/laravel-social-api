@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Facades\User;
-use App\Models\User as UserModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\GetPostsRequest;
 use App\Http\Requests\User\UpdateAvatarRequest;
@@ -12,6 +11,7 @@ use App\Http\Resources\Post\FeedPostResource;
 use App\Http\Resources\User\CurrentUserResource;
 use App\Http\Resources\User\SubscriberResource;
 use App\Http\Resources\User\UserResource;
+use App\Models\User as UserModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;

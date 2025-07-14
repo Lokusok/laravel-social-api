@@ -48,8 +48,7 @@ class Post extends Model
         return Like::query()
             ->where('post_id', '=', $this->id)
             ->where('user_id', '=', Auth::id())
-            ->exists()
-        ;
+            ->exists();
     }
 
     public function like(): LikeState
@@ -57,8 +56,7 @@ class Post extends Model
         $like = Like::query()
             ->where('post_id', '=', $this->id)
             ->where('user_id', '=', Auth::id())
-            ->first()
-        ;
+            ->first();
 
         if (is_null($like)) {
             $this->likes()->create([

@@ -4,7 +4,6 @@ namespace Tests\Feature\Post;
 
 use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
@@ -19,8 +18,7 @@ class GetPostTest extends TestCase
         parent::setUp();
 
         $this->post = Post::factory()
-            ->create(['user_id' => $this->getUser()->id])
-        ;
+            ->create(['user_id' => $this->getUser()->id]);
     }
 
     public function test_get_post(): void

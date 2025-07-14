@@ -5,7 +5,6 @@ namespace Tests\Feature\Post;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
@@ -22,15 +21,14 @@ class DeletePostTest extends TestCase
         parent::setUp();
 
         $this->post = Post::factory()
-            ->create(['user_id' => $this->getUser()->id])
-        ;
+            ->create(['user_id' => $this->getUser()->id]);
 
         $randomUser = User::factory()->create();
 
         $this->someonePost = Post::factory()
-            ->create(['user_id' => $randomUser->id])
-        ;
+            ->create(['user_id' => $randomUser->id]);
     }
+
     public function test_delete_post(): void
     {
         $response = $this->delete(route('posts.destroy', [

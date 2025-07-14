@@ -35,15 +35,13 @@ class PostService
             ->limit($limit)
             ->offset($offset)
             ->orderBy('id', 'DESC')
-            ->get()
-        ;
+            ->get();
     }
 
     public function totalFeedPosts(): int
     {
         return Auth::user()
             ->feedPosts()
-            ->count()
-        ;
+            ->count();
     }
 }

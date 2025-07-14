@@ -5,8 +5,8 @@ namespace Database\Seeders;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Subscription;
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,8 +29,7 @@ class DatabaseSeeder extends Seeder
                             ->count(10)
                             ->for(User::factory())
                     )
-            )->create()
-        ;
+            )->create();
 
         $users = User::all();
 

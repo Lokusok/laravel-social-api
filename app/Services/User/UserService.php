@@ -10,7 +10,6 @@ use App\Services\User\Data\UpdateUserData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class UserService
 {
@@ -20,8 +19,9 @@ class UserService
     }
 
     /**
-     * @throws \App\Exceptions\User\InvalidUserCredentialsException
      * @return array{token: string}
+     *
+     * @throws \App\Exceptions\User\InvalidUserCredentialsException
      */
     public function login(LoginData $data): array
     {
@@ -57,15 +57,13 @@ class UserService
             ->limit($limit)
             ->offset($offset)
             ->orderBy('id', 'DESC')
-            ->get()
-        ;
+            ->get();
     }
 
     public function totalPosts(User $user): int
     {
         return $user
             ->posts()
-            ->count()
-        ;
+            ->count();
     }
 }

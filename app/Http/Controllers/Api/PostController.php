@@ -19,8 +19,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('post.access')
-            ->only('destroy')
-        ;
+            ->only('destroy');
     }
 
     public function index(GetPostsRequest $request)

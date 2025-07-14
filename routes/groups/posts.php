@@ -14,5 +14,4 @@ Route::controller(PostController::class)
 
         Route::post('{post}/comment', 'addComment')
             ->name('comment');
-    })
-;
+    });

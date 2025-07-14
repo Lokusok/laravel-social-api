@@ -5,7 +5,6 @@ namespace Tests\Feature\Post;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
@@ -23,6 +22,7 @@ class AddCommentToPostTest extends TestCase
             'user_id' => $this->getUser()->id,
         ]);
     }
+
     public function test_add_comment_to_post(): void
     {
         $data = [

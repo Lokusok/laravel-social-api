@@ -16,10 +16,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    use HasApiTokens;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use Notifiable;
-    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -95,8 +96,7 @@ class User extends Authenticatable
         return Subscription::query()
             ->where('user_id', '=', $this->id)
             ->where('subscriber_id', '=', Auth::id())
-            ->exists()
-        ;
+            ->exists();
     }
 
     public function subscribe(): SubscribeState
@@ -104,16 +104,14 @@ class User extends Authenticatable
         $subscription = Subscription::query()
             ->where('user_id', '=', $this->id)
             ->where('subscriber_id', '=', Auth::id())
-            ->first()
-        ;
+            ->first();
 
         if (is_null($subscription)) {
             Subscription::query()
                 ->create([
                     'user_id' => $this->id,
                     'subscriber_id' => Auth::id(),
-                ])
-            ;
+                ]);
 
             return SubscribeState::SUBSCRIBED;
         }

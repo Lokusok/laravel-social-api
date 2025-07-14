@@ -14,7 +14,7 @@ function responseFailed(?string $message = null, int $code = Response::HTTP_BAD_
 
 function getModelNotFoundMessage(string $model): string
 {
-    return match($model) {
+    return match ($model) {
         'App\Models\User' => __('User not found'),
         default => __('Entity not found'),
     };

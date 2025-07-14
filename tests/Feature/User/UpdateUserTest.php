@@ -14,10 +14,10 @@ class UpdateUserTest extends TestCase
     public function test_success_update_user(): void
     {
         $data = [
-            "name" => fake()->name(),
-            "login" => fake()->unique()->userName(),
-            "email" => fake()->unique()->email(),
-            "about" => fake()->sentence(),
+            'name' => fake()->name(),
+            'login' => fake()->unique()->userName(),
+            'email' => fake()->unique()->email(),
+            'about' => fake()->sentence(),
         ];
 
         $response = $this->patch(route('user.update'), $data);

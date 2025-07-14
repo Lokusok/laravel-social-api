@@ -14,11 +14,11 @@ class RegisterTest extends TestCase
     public function test_success_register(): void
     {
         $data = [
-            "name" => fake()->name(),
-            "login" => fake()->unique()->userName(),
-            "email" => fake()->unique()->email(),
-            "password" => "123123123",
-            "password_confirmation" => "123123123"
+            'name' => fake()->name(),
+            'login' => fake()->unique()->userName(),
+            'email' => fake()->unique()->email(),
+            'password' => '123123123',
+            'password_confirmation' => '123123123',
         ];
 
         $response = $this->post(route('user.register'), $data);
@@ -58,11 +58,11 @@ class RegisterTest extends TestCase
     public function test_register_validation(): void
     {
         $response = $this->post(route('user.register'), [
-            "name" => null,
-            "login" => null,
-            "email" => "maximgmail.com",
-            "password" => "12",
-            "password_confirmation" => "34"
+            'name' => null,
+            'login' => null,
+            'email' => 'maximgmail.com',
+            'password' => '12',
+            'password_confirmation' => '34',
         ]);
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
